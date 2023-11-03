@@ -14,32 +14,6 @@ terraform {
   }
 }
 
-#Security Group LB
-resource "aws_security_group" "security_group_load_balancer" {
-  name_prefix = "security-group-load-balancer"
-  description = "load balancer SG"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    infra = "vpc-soat"
-    Name  = "security-group-load-balancer"
-  }
-}
-
 ### Target Group + Load Balancer
 
 resource "aws_lb_target_group" "target_group_soat_api" {
