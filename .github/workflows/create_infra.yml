@@ -1,4 +1,4 @@
-name: Terraform VPC
+name: Create LB Infra
 
 on:
   workflow_dispatch:

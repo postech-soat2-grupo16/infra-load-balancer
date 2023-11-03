@@ -1,4 +1,4 @@
-name: Destroy VPC infra 
+name: Destroy LB Infra
 
 on:
   workflow_dispatch:
