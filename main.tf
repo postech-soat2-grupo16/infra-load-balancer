@@ -77,5 +77,4 @@ resource "aws_lb_listener" "alb_soat_listener" {
     Name  = "alb-soat-listener"
     infra = "alb-soat-listener"
   }
-
 }
