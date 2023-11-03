@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  create-basic-infra:
+  create-lb-infra:
     name: deploy
     runs-on: ubuntu-latest
     permissions:
