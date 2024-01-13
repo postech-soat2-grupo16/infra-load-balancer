@@ -15,25 +15,15 @@ variable "aws_az_b" {
 
 variable "vpc_id" {
   type    = string
-  default = "value"
+  default = "vpc-02704242632eb2597"
 }
 
 variable "subnet_a" {
   type    = string
-  default = "value"
+  default = "subnet-0c485509fe2864438"
 }
 
 variable "subnet_b" {
   type    = string
-  default = "value"
-}
-
-variable "sg_load_balancer" {
-  type    = string
-  default = "value"
-}
-
-variable "health_check_path" {
-  type = string
-  default = "/ping"
+  default = "subnet-000064d84790b3f77"
 }
