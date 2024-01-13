@@ -65,21 +65,44 @@ resource "aws_lb" "alb_fastfood_api" {
   }
 }
 
-# Listener Mock 200 OK
-resource "aws_lb_listener" "alb_listener_fastfood_mock" {
-  load_balancer_arn = aws_lb.alb_fastfood_api.arn
-  port              = 8000
-  protocol          = "HTTP"
+# # Listener Mock 200 OK
+# resource "aws_lb_target_group" "teste_tg_1" {
+#   name     = "teste-tg1"
+#   port     = 8000
+#   protocol = "HTTP"
+#   vpc_id   = var.vpc_id
+# }
 
-  default_action {
-    type             = "fixed-response"
-    fixed_response {
-      content_type = "text/plain"
-      status_code  = "200"
-      message_body = "OK"
-    }
-  }
-}
+# resource "aws_lb_listener" "alb_listener_fastfood_mock" {
+#   load_balancer_arn = aws_lb.alb_fastfood_api.arn
+#   port              = 8000
+#   protocol          = "HTTP"
+
+#   default_action {
+#     type = "fixed-response"
+#     fixed_response {
+#       content_type = "text/plain"
+#       status_code  = "200"
+#       message_body = "OK"
+#     }
+#   }
+# }
+
+# resource "aws_lb_listener_rule" "app1_rule" {
+#   listener_arn = aws_lb_listener.alb_listener_fastfood_mock.arn
+#   priority     = 100
+
+#   action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.teste_tg_1.arn
+#   }
+
+#   condition {
+#     path_pattern {
+#       values = ["/app1/*"]
+#     }
+#   }
+# }
 
 ### Target Group + Load Balancer
 
