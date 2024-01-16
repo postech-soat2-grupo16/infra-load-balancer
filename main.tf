@@ -65,90 +65,25 @@ resource "aws_lb" "alb_fastfood_api" {
   }
 }
 
-# # Listener Mock 200 OK
-# resource "aws_lb_target_group" "teste_tg_1" {
-#   name     = "teste-tg1"
-#   port     = 8000
-#   protocol = "HTTP"
-#   vpc_id   = var.vpc_id
-# }
+# Listener empty/default
 
-# resource "aws_lb_listener" "alb_listener_fastfood_mock" {
-#   load_balancer_arn = aws_lb.alb_fastfood_api.arn
-#   port              = 8000
-#   protocol          = "HTTP"
+resource "aws_lb_listener" "alb_fastfood_listener" {
+  load_balancer_arn = aws_lb.alb_fastfood_api.arn
+  port              = 8000
+  protocol          = "HTTP"
 
-#   default_action {
-#     type = "fixed-response"
-#     fixed_response {
-#       content_type = "text/plain"
-#       status_code  = "200"
-#       message_body = "OK"
-#     }
-#   }
-# }
+  default_action {
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "200"
+      message_body = "OK"
+    }
+  }
 
-# resource "aws_lb_listener_rule" "app1_rule" {
-#   listener_arn = aws_lb_listener.alb_listener_fastfood_mock.arn
-#   priority     = 100
-
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.teste_tg_1.arn
-#   }
-
-#   condition {
-#     path_pattern {
-#       values = ["/app1/*"]
-#     }
-#   }
-# }
-
-### Target Group + Load Balancer
-
-# resource "aws_lb_target_group" "tg_fastfood_api" {
-#   name        = "target-group-fastfood"
-#   port        = 8000
-#   protocol    = "HTTP"
-#   target_type = "ip"
-#   vpc_id      = var.vpc_id
-
-#   health_check {
-#     enabled             = true
-#     interval            = 30
-#     matcher             = "200-299"
-#     path                = "/ping"
-#     port                = "traffic-port"
-#     protocol            = "HTTP"
-#     timeout             = 5
-#     healthy_threshold   = 5
-#     unhealthy_threshold = 2
-#   }
-
-#   tags = {
-#     infra   = "target-group-fastfood"
-#     service = "fastfood"
-#   }
-# }
-
-# output "tg_fastfood_api_arn" {
-#   value = aws_lb_target_group.tg_fastfood_api.arn
-# }
-
-# resource "aws_lb_listener" "alb_fastfood_listener" {
-#   depends_on        = [aws_lb.alb_fastfood_api]
-#   load_balancer_arn = aws_lb.alb_fastfood_api.arn
-#   port              = 8000
-#   protocol          = "HTTP"
-
-#   default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.tg_fastfood_api.arn
-#   }
-
-#   tags = {
-#     Name    = "alb-listener-fastfood"
-#     infra   = "alb-listener-fastfood"
-#     service = "fastfood"
-#   }
-# }
+  tags = {
+    Name    = "listener-default"
+    infra   = "alb-fastfood"
+    service = "fastfood"
+  }
+}
